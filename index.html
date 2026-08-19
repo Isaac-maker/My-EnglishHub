@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FluentNest — Tu centro para aprender inglés</title>
+  <meta name="description" content="FluentNest: el nido donde anidan todas tus herramientas para aprender inglés. Verbos, phrasal verbs y vocabularios temáticos EN–ES." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,300;0,400;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --c-light:  #CFF0EA;
+      --c-mid:    #88C9C4;
+      --c-teal:   #3E9B94;
+      --c-deep:   #20666B;
+      --c-dark:   #0C3B45;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Neuton', serif;
+      background: var(--c-light);
+      color: var(--c-dark);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- Decorative background ---------- */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 45vw; height: 45vw;
+      background: var(--c-mid);
+      opacity: .45;
+      top: -12vw; right: -12vw;
+    }
+    .blob-2 {
+      width: 38vw; height: 38vw;
+      background: var(--c-teal);
+      opacity: .22;
+      bottom: -14vw; left: -10vw;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+      text-align: center;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .85rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--c-deep);
+      border: 1px solid var(--c-mid);
+      background: rgba(255,255,255,.45);
+      padding: .45rem 1.1rem;
+      border-radius: 999px;
+      margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--c-dark);
+      line-height: 1.05;
+    }
+
+    h1 .accent { color: var(--c-teal); }
+
+    .tagline {
+      margin-top: 1rem;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      color: var(--c-deep);
+      max-width: 34rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- Section titles ---------- */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: clamp(2rem, 5vw, 3rem) 0 1.4rem;
+    }
+
+    .section-label h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      color: var(--c-deep);
+      white-space: nowrap;
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--c-mid), transparent);
+    }
+
+    /* ---------- Cards: fixed top sections ---------- */
+    .core-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1rem, 3vw, 1.75rem);
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 1px solid rgba(136, 201, 196, .55);
+      border-radius: 20px;
+      padding: clamp(1.4rem, 3.5vw, 2.1rem);
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-teal) 100%);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .card > * { position: relative; z-index: 1; }
+
+    .card:hover, .card:focus-visible {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px -14px rgba(12, 59, 69, .35);
+      border-color: var(--c-teal);
+      outline: none;
+    }
+
+    .card:hover::before, .card:focus-visible::before { opacity: 1; }
+    .card:hover .card-title, .card:focus-visible .card-title,
+    .card:hover .card-desc, .card:focus-visible .card-desc,
+    .card:hover .card-cta, .card:focus-visible .card-cta,
+    .card:hover .card-tag, .card:focus-visible .card-tag,
+    .card:hover .card-icon, .card:focus-visible .card-icon { color: #fff; }
+
+    .card:hover .card-icon-circle, .card:focus-visible .card-icon-circle {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.4);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .card-icon-circle {
+      width: 54px; height: 54px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--c-light);
+      border: 1px solid var(--c-mid);
+      font-size: 1.5rem;
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .card-tag {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--c-teal);
+      font-weight: 700;
+      transition: color .25s ease;
+    }
+
+    .card-title {
+      margin-top: 1.1rem;
+      font-size: clamp(1.5rem, 3.2vw, 2rem);
+      font-weight: 800;
+      color: var(--c-dark);
+      transition: color .25s ease;
+    }
+
+    .card-desc {
+      margin-top: .45rem;
+      font-size: 1.02rem;
+      color: var(--c-deep);
+      transition: color .25s ease;
+    }
+
+    .card-cta {
+      margin-top: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--c-deep);
+      transition: color .25s ease;
+    }
+
+    .card-cta .arrow { transition: transform .25s ease; }
+    .card:hover .card-cta .arrow { transform: translateX(6px); }
+
+    /* ---------- Vocabulary section ---------- */
+    .vocab-section {
+      margin-top: clamp(2.5rem, 6vw, 4rem);
+      background: linear-gradient(160deg, var(--c-deep) 0%, var(--c-dark) 100%);
+      border-radius: 28px;
+      padding: clamp(1.75rem, 4.5vw, 3rem);
+      box-shadow: 0 24px 50px -20px rgba(12, 59, 69, .45);
+    }
+
+    .vocab-header {
+      text-align: center;
+      margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+    }
+
+    .vocab-header .eyebrow {
+      display: inline-block;
+      font-size: .8rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: .6rem;
+    }
+
+    .vocab-header h2 {
+      color: var(--c-light);
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 800;
+    }
+
+    .vocab-header p {
+      color: var(--c-mid);
+      margin-top: .5rem;
+      font-size: 1.05rem;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(.9rem, 2.5vw, 1.4rem);
+    }
+
+    .vocab-card {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      background: rgba(207, 240, 234, .07);
+      border: 1px solid rgba(136, 201, 196, .35);
+      border-radius: 16px;
+      padding: 1.15rem 1.35rem;
+      text-decoration: none;
+      color: var(--c-light);
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+
+    .vocab-card:hover, .vocab-card:focus-visible {
+      transform: translateY(-4px);
+      background: rgba(207, 240, 234, .15);
+      border-color: var(--c-mid);
+      outline: none;
+    }
+
+    .vocab-emoji {
+      font-size: 1.9rem;
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      display: grid;
+      place-items: center;
+      background: rgba(207, 240, 234, .1);
+      border-radius: 14px;
+      border: 1px solid rgba(136, 201, 196, .3);
+    }
+
+    .vocab-info h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .vocab-info p {
+      font-size: .95rem;
+      color: var(--c-mid);
+      margin-top: .15rem;
+    }
+
+    .vocab-go {
+      margin-left: auto;
+      flex-shrink: 0;
+      color: var(--c-mid);
+      font-size: 1.3rem;
+      transition: transform .22s ease, color .22s ease;
+    }
+
+    .vocab-card:hover .vocab-go { transform: translateX(5px); color: var(--c-light); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      padding: clamp(2.5rem, 6vw, 4rem) 0 2.5rem;
+      color: var(--c-deep);
+      font-size: 1rem;
+    }
+
+    footer .nest {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: .6rem;
+    }
+
+    .footer-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      text-decoration: none;
+      color: var(--c-deep);
+      font-style: italic;
+      padding: .55rem 1.3rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: color .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .footer-credit strong {
+      font-style: normal;
+      font-weight: 800;
+      color: var(--c-dark);
+      transition: color .25s ease;
+    }
+
+    .footer-credit .dot { color: var(--c-teal); }
+
+    .footer-credit:hover, .footer-credit:focus-visible {
+      color: var(--c-dark);
+      background: rgba(255,255,255,.55);
+      border-color: var(--c-mid);
+      outline: none;
+    }
+
+    .footer-credit:hover strong { color: var(--c-teal); }
+
+    /* ---------- Header eyebrow ---------- */
+    .eyebrow-top {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 1.1rem;
+      font-size: .85rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--c-teal);
+      font-weight: 700;
+      transition: color .25s ease, letter-spacing .3s ease;
+    }
+
+    .eyebrow-top:hover, .eyebrow-top:focus-visible {
+      color: var(--c-deep);
+      letter-spacing: .38em;
+      outline: none;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      .core-grid { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 420px) {
+      .vocab-emoji { width: 48px; height: 48px; font-size: 1.6rem; }
+      .vocab-info h3 { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <div class="container">
+
+    <header>
+      <a class="eyebrow eyebrow-top" href="https://github.com/Isaac-maker" target="_blank" rel="noopener">✦ Isaac-maker</a>
+      
+      <h1>My English<span class="accent">Hub</span></h1>
+      
+    </header>
+
+    <!-- Secciones fijas: Verbos y Phrasal Verbs -->
+    <section aria-label="Secciones principales">
+      <div class="section-label">
+        <h2>Gramática esencial</h2>
+      </div>
+
+      <div class="core-grid">
+        <a class="card" href="https://isaac-maker.github.io/Verbs/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-icon-circle">📖</div>
+            <span class="card-tag">Verbos</span>
+          </div>
+          <div>
+            <h3 class="card-title">Diccionario de Verbos</h3>
+            <p class="card-desc">Tu referencia completa de verbos en inglés: significados y tiempos.</p>
+          </div>
+          <span class="card-cta">Abrir diccionario <span class="arrow">→</span></span>
+        </a>
+
+        <a class="card" href="https://isaac-maker.github.io/Phrasal-Verbs-Separable-Non-separable-EN-ES-/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-icon-circle">🧩</div>
+            <span class="card-tag">Phrasal Verbs</span>
+          </div>
+          <div>
+            <h3 class="card-title">Phrasal Verbs</h3>
+            <p class="card-desc">Separables e inseparables.</p>
+          </div>
+          <span class="card-cta">Explorar phrasal verbs <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sección especial: Vocabularios -->
+    <section class="vocab-section" aria-label="Vocabularios temáticos">
+      <div class="vocab-header">
+        <span class="eyebrow">Colección temática</span>
+        <h2>Vocabularios</h2>
+      
+      </div>
+
+      <div class="vocab-grid">
+        <a class="vocab-card" href="https://isaac-maker.github.io/Gas-station-vs-charging-station/" target="_blank" rel="noopener">
+          <div class="vocab-emoji">⛽</div>
+          <div class="vocab-info">
+            <h3>Gas Station vs Charging Station</h3>
+            <p>Combustible vs. carga eléctrica</p>
+          </div>
+          <span class="vocab-go">→</span>
+        </a>
+
+        <a class="vocab-card" href="https://isaac-maker.github.io/The-Smart-City-Vocabulario-EN-ES-/" target="_blank" rel="noopener">
+          <div class="vocab-emoji">🏙️</div>
+          <div class="vocab-info">
+            <h3>The Smart City</h3>
+            <p>Vocabulario EN–ES de la ciudad inteligente</p>
+          </div>
+          <span class="vocab-go">→</span>
+        </a>
+
+        <a class="vocab-card" href="https://isaac-maker.github.io/Home-Office-Vocabulary---Vocabulario/" target="_blank" rel="noopener">
+          <div class="vocab-emoji">🏠</div>
+          <div class="vocab-info">
+            <h3>Home Office</h3>
+            <p>Vocabulario para tu oficina en casa</p>
+          </div>
+          <span class="vocab-go">→</span>
+        </a>
+
+        <a class="vocab-card" href="https://isaac-maker.github.io/Remote-Work-Coworking-Vocabulario-Ingl-s-Espa-ol/" target="_blank" rel="noopener">
+          <div class="vocab-emoji">💻</div>
+          <div class="vocab-info">
+            <h3>Remote Work &amp; Coworking</h3>
+            <p>Inglés–Español para el trabajo remoto</p>
+          </div>
+          <span class="vocab-go">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <span class="nest">-------------------------------</span>
+      <a class="footer-credit" href="https://github.com/Isaac-maker" target="_blank" rel="noopener">
+        <span>Created by</span>
+        <span class="dot">•</span>
+        <strong>Isaac-maker</strong>
+      </a>
+    </footer>
+
+  </div>
+</body>
+</html>
