@@ -3,18 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FluentNest — Tu centro para aprender inglés</title>
+  <meta name="theme-color" content="#FBF6EF" />
+  <title>My English Hub</title>
   <meta name="description" content="FluentNest: el nido donde anidan todas tus herramientas para aprender inglés. Verbos, phrasal verbs y vocabularios temáticos EN–ES." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,300;0,400;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --c-light:  #CFF0EA;
-      --c-mid:    #88C9C4;
-      --c-teal:   #3E9B94;
-      --c-deep:   #20666B;
-      --c-dark:   #0C3B45;
+      /* Paleta cálida editorial: crema, tinta, naranja quemado, dorado */
+      --cream:    #FBF6EF;
+      --cream-2:  #F5EBDD;
+      --ink:      #211A12;
+      --ink-soft: #4A4038;
+      --accent:   #E4572E;
+      --accent-d: #C2431D;
+      --gold:     #C9A227;
+      --blush:    #F3D9C6;
+      --card:     #FFFFFF;
+      --line:     #E7DCCB;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --shadow-hover: 0 24px 48px -18px rgba(33, 26, 18, .28);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,104 +32,187 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Neuton', serif;
-      background: var(--c-light);
-      color: var(--c-dark);
+      font-family: 'Manrope', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
       min-height: 100vh;
-      line-height: 1.5;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ---------- Decorative background ---------- */
-    .bg-blob {
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ---------- Fondo decorativo: halos cálidos ---------- */
+    .halo {
       position: fixed;
       border-radius: 50%;
-      filter: blur(90px);
+      filter: blur(80px);
       z-index: -1;
       pointer-events: none;
     }
-    .blob-1 {
-      width: 45vw; height: 45vw;
-      background: var(--c-mid);
-      opacity: .45;
-      top: -12vw; right: -12vw;
+    .halo-1 {
+      width: 46vw; height: 46vw;
+      background: var(--blush);
+      opacity: .85;
+      top: -14vw; left: -12vw;
     }
-    .blob-2 {
-      width: 38vw; height: 38vw;
-      background: var(--c-teal);
-      opacity: .22;
-      bottom: -14vw; left: -10vw;
+    .halo-2 {
+      width: 34vw; height: 34vw;
+      background: #F2E3B6;
+      opacity: .55;
+      top: 22vh; right: -14vw;
+    }
+    .halo-3 {
+      width: 40vw; height: 40vw;
+      background: #F8D8C9;
+      opacity: .5;
+      bottom: -18vw; left: 20vw;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0 clamp(1.25rem, 4vw, 3rem);
     }
 
-    /* ---------- Header ---------- */
+    /* ---------- Header / Hero ---------- */
     header {
-      padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+      padding: clamp(3.5rem, 9vw, 6.5rem) 0 clamp(2rem, 5vw, 3rem);
       text-align: center;
     }
 
-    .brand-badge {
+    .eyebrow-top {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      font-size: .85rem;
-      letter-spacing: .22em;
+      gap: .55rem;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .24em;
       text-transform: uppercase;
-      color: var(--c-deep);
-      border: 1px solid var(--c-mid);
-      background: rgba(255,255,255,.45);
-      padding: .45rem 1.1rem;
+      text-decoration: none;
+      color: var(--accent-d);
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: .5rem 1.15rem;
       border-radius: 999px;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 6px 18px -8px rgba(33,26,18,.18);
+      transition: transform .25s ease, box-shadow .25s ease, color .25s ease;
     }
+
+    .eyebrow-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -10px rgba(33,26,18,.25);
+      color: var(--accent);
+    }
+
+    .eyebrow-top .spark { color: var(--gold); }
 
     h1 {
-      font-size: clamp(2.6rem, 7vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      color: var(--c-dark);
-      line-height: 1.05;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 9vw, 5.6rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      color: var(--ink);
     }
 
-    h1 .accent { color: var(--c-teal); }
+    h1 .accent {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent);
+      position: relative;
+      white-space: nowrap;
+    }
+
+    h1 .accent::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: .06em;
+      height: .14em;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      border-radius: 999px;
+      opacity: .45;
+      z-index: -1;
+    }
 
     .tagline {
-      margin-top: 1rem;
-      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-      color: var(--c-deep);
-      max-width: 34rem;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 1.3rem auto 0;
+      max-width: 36rem;
+      font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+      color: var(--ink-soft);
     }
 
-    /* ---------- Section titles ---------- */
+    .hero-stats {
+      margin-top: 2.2rem;
+      display: inline-flex;
+      gap: clamp(1.25rem, 4vw, 2.5rem);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat { text-align: center; }
+
+    .stat b {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat span {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .stat + .stat { position: relative; padding-left: clamp(1.25rem, 4vw, 2.5rem); }
+    .stat + .stat::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--line);
+    }
+
+    /* ---------- Títulos de sección ---------- */
     .section-label {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin: clamp(2rem, 5vw, 3rem) 0 1.4rem;
+      margin: clamp(2.25rem, 5vw, 3.25rem) 0 1.5rem;
     }
 
     .section-label h2 {
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      font-weight: 700;
-      color: var(--c-deep);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+      font-weight: 600;
+      color: var(--ink);
       white-space: nowrap;
+    }
+
+    .section-label .num {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--accent);
+      font-size: clamp(1.1rem, 2.4vw, 1.4rem);
     }
 
     .section-label::after {
       content: "";
       flex: 1;
       height: 1px;
-      background: linear-gradient(to right, var(--c-mid), transparent);
+      background: linear-gradient(to right, var(--line), transparent);
     }
 
-    /* ---------- Cards: fixed top sections ---------- */
+    /* ---------- Cards principales ---------- */
     .core-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -131,45 +224,37 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: #ffffff;
-      border: 1px solid rgba(136, 201, 196, .55);
-      border-radius: 20px;
-      padding: clamp(1.4rem, 3.5vw, 2.1rem);
+      gap: 1.4rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3.5vw, 2.2rem);
       text-decoration: none;
       color: inherit;
       overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 10px 30px -18px rgba(33,26,18,.25);
+      transition: transform .28s cubic-bezier(.2,.7,.3,1.2), box-shadow .28s ease, border-color .28s ease;
     }
 
-    .card::before {
+    .card::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-teal) 100%);
-      opacity: 0;
-      transition: opacity .25s ease;
+      left: 0; right: 0; bottom: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s ease;
     }
 
-    .card > * { position: relative; z-index: 1; }
-
     .card:hover, .card:focus-visible {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px -14px rgba(12, 59, 69, .35);
-      border-color: var(--c-teal);
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--blush);
       outline: none;
     }
 
-    .card:hover::before, .card:focus-visible::before { opacity: 1; }
-    .card:hover .card-title, .card:focus-visible .card-title,
-    .card:hover .card-desc, .card:focus-visible .card-desc,
-    .card:hover .card-cta, .card:focus-visible .card-cta,
-    .card:hover .card-tag, .card:focus-visible .card-tag,
-    .card:hover .card-icon, .card:focus-visible .card-icon { color: #fff; }
-
-    .card:hover .card-icon-circle, .card:focus-visible .card-icon-circle {
-      background: rgba(255,255,255,.18);
-      border-color: rgba(255,255,255,.4);
-    }
+    .card:hover::after, .card:focus-visible::after { transform: scaleX(1); }
 
     .card-top {
       display: flex;
@@ -179,161 +264,205 @@
     }
 
     .card-icon-circle {
-      width: 54px; height: 54px;
+      width: 58px; height: 58px;
       flex-shrink: 0;
       display: grid;
       place-items: center;
-      border-radius: 16px;
-      background: var(--c-light);
-      border: 1px solid var(--c-mid);
-      font-size: 1.5rem;
-      transition: background .25s ease, border-color .25s ease;
+      border-radius: 18px;
+      font-size: 1.55rem;
+      background: linear-gradient(140deg, var(--cream-2), var(--blush));
+      border: 1px solid var(--line);
+      transition: transform .28s ease, background .28s ease;
     }
 
+    .card:hover .card-icon-circle { transform: rotate(-6deg) scale(1.06); }
+
     .card-tag {
-      font-size: .75rem;
-      letter-spacing: .18em;
+      font-size: .72rem;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      color: var(--c-teal);
-      font-weight: 700;
-      transition: color .25s ease;
+      color: var(--accent-d);
+      font-weight: 800;
+      background: #FBE9E0;
+      border: 1px solid #F3CDB9;
+      padding: .35rem .85rem;
+      border-radius: 999px;
+      white-space: nowrap;
     }
 
     .card-title {
-      margin-top: 1.1rem;
-      font-size: clamp(1.5rem, 3.2vw, 2rem);
-      font-weight: 800;
-      color: var(--c-dark);
-      transition: color .25s ease;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.15rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
     }
 
     .card-desc {
-      margin-top: .45rem;
-      font-size: 1.02rem;
-      color: var(--c-deep);
-      transition: color .25s ease;
+      margin-top: .5rem;
+      font-size: 1rem;
+      color: var(--ink-soft);
     }
 
     .card-cta {
-      margin-top: 1.5rem;
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--c-deep);
-      transition: color .25s ease;
+      gap: .55rem;
+      font-weight: 800;
+      font-size: .98rem;
+      color: var(--accent-d);
     }
 
-    .card-cta .arrow { transition: transform .25s ease; }
-    .card:hover .card-cta .arrow { transform: translateX(6px); }
+    .card-cta .arrow {
+      display: inline-grid;
+      place-items: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: #FBE9E0;
+      transition: transform .28s ease, background .28s ease, color .28s ease;
+    }
 
-    /* ---------- Vocabulary section ---------- */
+    .card:hover .card-cta .arrow {
+      transform: translateX(6px);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ---------- Sección vocabulario (panel oscuro) ---------- */
     .vocab-section {
-      margin-top: clamp(2.5rem, 6vw, 4rem);
-      background: linear-gradient(160deg, var(--c-deep) 0%, var(--c-dark) 100%);
-      border-radius: 28px;
-      padding: clamp(1.75rem, 4.5vw, 3rem);
-      box-shadow: 0 24px 50px -20px rgba(12, 59, 69, .45);
+      margin-top: clamp(2.75rem, 6vw, 4.25rem);
+      position: relative;
+      background:
+        radial-gradient(60% 90% at 85% 10%, rgba(228,87,46,.22) 0%, transparent 60%),
+        radial-gradient(50% 80% at 10% 90%, rgba(201,162,39,.18) 0%, transparent 55%),
+        var(--ink);
+      border-radius: 32px;
+      padding: clamp(1.75rem, 4.5vw, 3.25rem);
+      box-shadow: 0 30px 60px -25px rgba(33,26,18,.5);
     }
 
     .vocab-header {
       text-align: center;
-      margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+      margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
     }
 
     .vocab-header .eyebrow {
       display: inline-block;
-      font-size: .8rem;
-      letter-spacing: .25em;
+      font-size: .78rem;
+      letter-spacing: .28em;
       text-transform: uppercase;
-      color: var(--c-mid);
-      margin-bottom: .6rem;
+      color: var(--gold);
+      font-weight: 800;
+      margin-bottom: .7rem;
     }
 
     .vocab-header h2 {
-      color: var(--c-light);
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-      font-weight: 800;
+      font-family: 'Fraunces', serif;
+      color: var(--cream);
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 600;
+      line-height: 1.05;
     }
 
+    .vocab-header h2 em { color: var(--accent); font-weight: 500; }
+
     .vocab-header p {
-      color: var(--c-mid);
-      margin-top: .5rem;
-      font-size: 1.05rem;
+      color: rgba(245,235,221,.75);
+      margin-top: .6rem;
+      font-size: 1.02rem;
     }
 
     .vocab-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: clamp(.9rem, 2.5vw, 1.4rem);
+      gap: clamp(.85rem, 2.5vw, 1.3rem);
     }
 
     .vocab-card {
       display: flex;
       align-items: center;
-      gap: 1.1rem;
-      background: rgba(207, 240, 234, .07);
-      border: 1px solid rgba(136, 201, 196, .35);
-      border-radius: 16px;
-      padding: 1.15rem 1.35rem;
+      gap: 1.05rem;
+      background: rgba(251,246,239,.05);
+      border: 1px solid rgba(251,246,239,.14);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.25rem;
       text-decoration: none;
-      color: var(--c-light);
-      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+      color: var(--cream);
+      backdrop-filter: blur(4px);
+      transition: transform .24s ease, background .24s ease, border-color .24s ease;
     }
 
     .vocab-card:hover, .vocab-card:focus-visible {
       transform: translateY(-4px);
-      background: rgba(207, 240, 234, .15);
-      border-color: var(--c-mid);
+      background: rgba(251,246,239,.1);
+      border-color: rgba(228,87,46,.55);
       outline: none;
     }
 
     .vocab-emoji {
-      font-size: 1.9rem;
+      font-size: 1.75rem;
       flex-shrink: 0;
       width: 56px; height: 56px;
       display: grid;
       place-items: center;
-      background: rgba(207, 240, 234, .1);
-      border-radius: 14px;
-      border: 1px solid rgba(136, 201, 196, .3);
+      background: rgba(251,246,239,.08);
+      border-radius: 16px;
+      border: 1px solid rgba(251,246,239,.15);
+      transition: transform .24s ease;
     }
 
+    .vocab-card:hover .vocab-emoji { transform: scale(1.1) rotate(-4deg); }
+
+    .vocab-info { min-width: 0; }
+
     .vocab-info h3 {
-      font-size: 1.18rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
     }
 
     .vocab-info p {
-      font-size: .95rem;
-      color: var(--c-mid);
+      font-size: .9rem;
+      color: rgba(245,235,221,.62);
       margin-top: .15rem;
     }
 
     .vocab-go {
       margin-left: auto;
       flex-shrink: 0;
-      color: var(--c-mid);
-      font-size: 1.3rem;
-      transition: transform .22s ease, color .22s ease;
+      display: grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      color: var(--gold);
+      border: 1px solid rgba(201,162,39,.4);
+      font-size: 1.05rem;
+      transition: transform .24s ease, background .24s ease, color .24s ease;
     }
 
-    .vocab-card:hover .vocab-go { transform: translateX(5px); color: var(--c-light); }
+    .vocab-card:hover .vocab-go {
+      transform: translateX(4px);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
 
     /* ---------- Footer ---------- */
     footer {
       text-align: center;
-      padding: clamp(2.5rem, 6vw, 4rem) 0 2.5rem;
-      color: var(--c-deep);
-      font-size: 1rem;
+      padding: clamp(3rem, 7vw, 4.5rem) 0 6rem;
+      color: var(--ink-soft);
+      font-size: .98rem;
     }
 
-    footer .nest {
-      font-size: 1.4rem;
+    footer .rule {
       display: block;
-      margin-bottom: .6rem;
+      width: 64px;
+      height: 2px;
+      margin: 0 auto 1.4rem;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      border-radius: 999px;
     }
 
     .footer-credit {
@@ -341,85 +470,131 @@
       align-items: center;
       gap: .55rem;
       text-decoration: none;
-      color: var(--c-deep);
-      font-style: italic;
-      padding: .55rem 1.3rem;
-      border: 1px solid transparent;
+      color: var(--ink-soft);
+      padding: .6rem 1.4rem;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      transition: color .25s ease, border-color .25s ease, background .25s ease;
+      background: #fff;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
 
     .footer-credit strong {
-      font-style: normal;
       font-weight: 800;
-      color: var(--c-dark);
+      color: var(--ink);
       transition: color .25s ease;
     }
 
-    .footer-credit .dot { color: var(--c-teal); }
+    .footer-credit .dot { color: var(--accent); }
 
     .footer-credit:hover, .footer-credit:focus-visible {
-      color: var(--c-dark);
-      background: rgba(255,255,255,.55);
-      border-color: var(--c-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -12px rgba(33,26,18,.3);
+      border-color: var(--blush);
       outline: none;
     }
 
-    .footer-credit:hover strong { color: var(--c-teal); }
+    .footer-credit:hover strong { color: var(--accent-d); }
 
-    /* ---------- Header eyebrow ---------- */
-    .eyebrow-top {
-      display: block;
-      width: fit-content;
-      margin: 0 auto 1.1rem;
-      font-size: .85rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--c-teal);
+    /* ---------- Navegación rápida móvil (solo < 720px) ---------- */
+    .mobile-dock {
+      display: none;
+      position: fixed;
+      left: 50%;
+      bottom: .9rem;
+      transform: translateX(-50%);
+      z-index: 50;
+      background: rgba(33,26,18,.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(251,246,239,.15);
+      border-radius: 999px;
+      padding: .45rem;
+      gap: .35rem;
+      box-shadow: 0 14px 34px -10px rgba(33,26,18,.5);
+    }
+
+    .mobile-dock a {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .82rem;
       font-weight: 700;
-      transition: color .25s ease, letter-spacing .3s ease;
+      color: var(--cream);
+      text-decoration: none;
+      padding: .6rem 1.05rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background .22s ease, color .22s ease;
     }
 
-    .eyebrow-top:hover, .eyebrow-top:focus-visible {
-      color: var(--c-deep);
-      letter-spacing: .38em;
-      outline: none;
+    .mobile-dock a.active, .mobile-dock a:hover { background: var(--accent); color: #fff; }
+
+    /* ---------- Animación de entrada ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards;
+    }
+    .d1 { animation-delay: .05s; }
+    .d2 { animation-delay: .15s; }
+    .d3 { animation-delay: .25s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { animation: none; opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
     }
 
     /* ---------- Responsive ---------- */
     @media (max-width: 720px) {
       .core-grid { grid-template-columns: 1fr; }
       .vocab-grid { grid-template-columns: 1fr; }
+      .mobile-dock { display: flex; }
+      .card { padding: 1.5rem; }
+      .vocab-card { padding: 1rem 1.1rem; }
+      .halo-2 { display: none; }
     }
 
     @media (max-width: 420px) {
-      .vocab-emoji { width: 48px; height: 48px; font-size: 1.6rem; }
-      .vocab-info h3 { font-size: 1.05rem; }
+      .vocab-emoji { width: 48px; height: 48px; font-size: 1.5rem; }
+      .vocab-info h3 { font-size: 1rem; }
+      .vocab-info p { font-size: .84rem; }
+      .card-icon-circle { width: 50px; height: 50px; font-size: 1.35rem; }
+      .hero-stats { gap: 1.1rem; }
+      .stat + .stat { padding-left: 1.1rem; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
+  <div class="halo halo-1"></div>
+  <div class="halo halo-2"></div>
+  <div class="halo halo-3"></div>
 
   <div class="container">
 
     <header>
-      <a class="eyebrow eyebrow-top" href="https://github.com/Isaac-maker" target="_blank" rel="noopener">✦ Isaac-maker</a>
-      
-      <h1>My English<span class="accent">Hub</span></h1>
-      
+      <a class="eyebrow-top reveal d1" href="https://github.com/Isaac-maker" target="_blank" rel="noopener">
+        <span class="spark">✦</span> Isaac-maker
+      </a>
+
+      <h1 class="reveal d2">My English<br /><span class="accent">Hub</span></h1>
+
+      <p class="tagline reveal d3">Tu centro para aprender inglés: verbos, phrasal verbs y vocabularios temáticos EN–ES, todo en un solo lugar.</p>
+
+    
     </header>
 
     <!-- Secciones fijas: Verbos y Phrasal Verbs -->
-    <section aria-label="Secciones principales">
+    <section aria-label="Secciones principales" id="gramatica">
       <div class="section-label">
+        <span class="num">01</span>
         <h2>Gramática esencial</h2>
       </div>
 
       <div class="core-grid">
-        <a class="card" href="https://isaac-maker.github.io/Verbs/" target="_blank" rel="noopener">
+        <a class="card reveal d1" href="https://isaac-maker.github.io/Verbs/" target="_blank" rel="noopener">
           <div class="card-top">
             <div class="card-icon-circle">📖</div>
             <span class="card-tag">Verbos</span>
@@ -431,14 +606,14 @@
           <span class="card-cta">Abrir diccionario <span class="arrow">→</span></span>
         </a>
 
-        <a class="card" href="https://isaac-maker.github.io/Phrasal-Verbs-Separable-Non-separable-EN-ES-/" target="_blank" rel="noopener">
+        <a class="card reveal d2" href="https://isaac-maker.github.io/Phrasal-Verbs-Separable-Non-separable-EN-ES-/" target="_blank" rel="noopener">
           <div class="card-top">
             <div class="card-icon-circle">🧩</div>
             <span class="card-tag">Phrasal Verbs</span>
           </div>
           <div>
             <h3 class="card-title">Phrasal Verbs</h3>
-            <p class="card-desc">Separables e inseparables.</p>
+            <p class="card-desc">Separables e inseparables, explicados con claridad.</p>
           </div>
           <span class="card-cta">Explorar phrasal verbs <span class="arrow">→</span></span>
         </a>
@@ -446,45 +621,42 @@
     </section>
 
     <!-- Sección especial: Vocabularios -->
-    <section class="vocab-section" aria-label="Vocabularios temáticos">
+    <section class="vocab-section reveal" aria-label="Vocabularios temáticos" id="vocabularios">
       <div class="vocab-header">
         <span class="eyebrow">Colección temática</span>
-        <h2>Vocabularios</h2>
-      
+        <h2>Vocabularios <em>temáticos</em></h2>
+        <p>Siete mini-diccionarios bilingües para cada situación de tu vida.</p>
       </div>
 
       <div class="vocab-grid">
 
-     <a class="vocab-card" href="https://isaac-maker.github.io/Local-Organic-Lifestyle/" target="_blank" rel="noopener">
+        <a class="vocab-card" href="https://isaac-maker.github.io/Local-Organic-Lifestyle/" target="_blank" rel="noopener">
           <div class="vocab-emoji">🍓</div>
           <div class="vocab-info">
-            <h3>Local & Organic Lifestyle</h3>
-            <p>Local & Organic Lifestyle</p>
+            <h3>Local &amp; Organic Lifestyle</h3>
+            <p>Estilo de vida local y orgánico</p>
           </div>
           <span class="vocab-go">→</span>
         </a>
-        
 
-          <a class="vocab-card" href="https://isaac-maker.github.io/Urban-Dinning/" target="_blank" rel="noopener">
+        <a class="vocab-card" href="https://isaac-maker.github.io/Urban-Dinning/" target="_blank" rel="noopener">
           <div class="vocab-emoji">🍷</div>
           <div class="vocab-info">
-            <h3>Urban Dinning</h3>
-            <p>Urban Dinning</p>
+            <h3>Urban Dining</h3>
+            <p>Salidas y restaurantes urbanos</p>
           </div>
           <span class="vocab-go">→</span>
         </a>
 
-        
-  <a class="vocab-card" href="https://isaac-maker.github.io/Fitness-Mental-Health-Vocabulario-Ingl-s-Espa-ol/" target="_blank" rel="noopener">
+        <a class="vocab-card" href="https://isaac-maker.github.io/Fitness-Mental-Health-Vocabulario-Ingl-s-Espa-ol/" target="_blank" rel="noopener">
           <div class="vocab-emoji">🏋️‍♂️</div>
           <div class="vocab-info">
-            <h3>Fitness & Mental Health</h3>
-            <p>Fitness & Mental Health</p>
+            <h3>Fitness &amp; Mental Health</h3>
+            <p>Ejercicio y bienestar emocional</p>
           </div>
           <span class="vocab-go">→</span>
         </a>
 
-        
         <a class="vocab-card" href="https://isaac-maker.github.io/Gas-station-vs-charging-station/" target="_blank" rel="noopener">
           <div class="vocab-emoji">⛽</div>
           <div class="vocab-info">
@@ -498,7 +670,7 @@
           <div class="vocab-emoji">🏙️</div>
           <div class="vocab-info">
             <h3>The Smart City</h3>
-            <p>Vocabulario EN–ES de la ciudad inteligente</p>
+            <p>La ciudad inteligente EN–ES</p>
           </div>
           <span class="vocab-go">→</span>
         </a>
@@ -516,7 +688,7 @@
           <div class="vocab-emoji">💻</div>
           <div class="vocab-info">
             <h3>Remote Work &amp; Coworking</h3>
-            <p>Inglés–Español para el trabajo remoto</p>
+            <p>Inglés–Español para trabajo remoto</p>
           </div>
           <span class="vocab-go">→</span>
         </a>
@@ -525,7 +697,7 @@
 
     <!-- ===== FOOTER ===== -->
     <footer>
-      <span class="nest">-------------------------------</span>
+      <span class="rule"></span>
       <a class="footer-credit" href="https://github.com/Isaac-maker" target="_blank" rel="noopener">
         <span>Created by</span>
         <span class="dot">•</span>
@@ -534,5 +706,12 @@
     </footer>
 
   </div>
+
+  <!-- Dock flotante solo en móvil -->
+  <nav class="mobile-dock" aria-label="Navegación rápida">
+    <a href="#gramatica">📖 Gramática</a>
+    <a href="#vocabularios" class="active">🏙️ Vocabularios</a>
+  </nav>
+
 </body>
 </html>
